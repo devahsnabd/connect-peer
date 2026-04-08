@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peer Connect Onboarding</title>
+    <link rel="stylesheet" href="styles/shared.css" />
+    <link rel="stylesheet" href="onboarding.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel" aria-label="Onboarding flow">
+        <header class="header">
+          <div class="brand">
+            <span class="logo" aria-hidden="true">
+              <img src="icons/logo.svg" alt="" />
+            </span>
+            <h1>Peer Connect</h1>
+          </div>
+          <button id="skipBtnTop" class="icon-btn" aria-label="Skip onboarding">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </header>
+
+        <div class="stepper" aria-hidden="true">
+          <div class="step-track">
+            <span id="stepBar1" class="step-fill active"></span>
+            <span id="stepBar2" class="step-fill"></span>
+            <span id="stepBar3" class="step-fill"></span>
+          </div>
+          <div class="step-labels">
+            <span id="label1" class="active"><i></i>AI + HUMAN GUIDANCE</span>
+            <span id="label2"><i></i>SMARTER SUGGESTIONS</span>
+            <span id="label3"><i></i>COMPLETE</span>
+          </div>
+        </div>
+
+        <section id="step1" class="step" aria-labelledby="step1Title">
+          <h2 id="step1Title">Find the right human insight when AI is not enough.</h2>
+          <p class="muted space-top">
+            This extension quietly spots moments where hearing from someone experienced may help more than
+            another search result or another chat reply.
+          </p>
+          <ul class="feature-list space-top">
+            <li>
+              <span class="item-icon globe"></span>
+              <span>Works inside your normal browser flow.</span>
+              <span class="item-end active" aria-hidden="true"></span>
+            </li>
+            <li>
+              <span class="item-icon briefcase"></span>
+              <span>Only appears when it seems useful.</span>
+              <span class="item-end" aria-hidden="true"></span>
+            </li>
+            <li>
+              <span class="item-icon dot"></span>
+              <span>No extra app or complicated setup.</span>
+              <span class="item-end" aria-hidden="true"></span>
+            </li>
+          </ul>
+        </section>
+
+        <section id="step2" class="step hidden" aria-labelledby="step2Title">
+          <h2 id="step2Title">Add your goal context</h2>
+          <p class="privacy space-top">
+            We only use your goal context to find peer matches — never to sell ads.
+          </p>
+          <div class="field space-top">
+            <label for="goalContext">Goal context (max 200 chars)</label>
+            <textarea
+              id="goalContext"
+              maxlength="200"
+              rows="5"
+              aria-label="Goal context"
+              placeholder="Example: Preparing for product design interviews in 6 weeks."
+            ></textarea>
+            <p class="muted"><span id="charCount">0</span>/200</p>
+          </div>
+        </section>
+
+        <section id="step3" class="step hidden" aria-labelledby="step3Title">
+          <h2 id="step3Title">Opt in to suggestions</h2>
+          <p class="muted space-top">
+            You can pause any time from the extension popup or overlay card.
+          </p>
+          <label class="consent space-top">
+            <input id="optInCheckbox" type="checkbox" />
+            Enable peer suggestions
+          </label>
+          <ul class="check-list space-top">
+            <li>Goal context saved</li>
+            <li>Suggestions enabled</li>
+            <li>Privacy preferences respected</li>
+          </ul>
+        </section>
+
+        <footer class="footer">
+          <button id="skipBtn" class="btn btn-ghost" aria-label="Skip onboarding">Skip onboarding</button>
+          <div class="row">
+            <button id="backBtn" class="btn btn-ghost hidden" aria-label="Back step">Back</button>
+            <button id="nextBtn" class="btn btn-primary" aria-label="Next step">Next</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+    <script src="crypto.js"></script>
+    <script src="storage.js"></script>
+    <script src="onboarding.js"></script>
+  </body>
+</html>

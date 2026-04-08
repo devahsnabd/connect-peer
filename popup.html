@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Peer Connect</title>
+    <link rel="stylesheet" href="styles/shared.css"/>
+    <link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+<main class="app-shell">
+
+    <section style="width: 100%">
+        <header class="top">
+            <div class="brand">
+            <span class="logo" aria-hidden="true">
+              <img src="icons/logo.svg" alt=""/>
+            </span>
+                <h1>Peer Connect</h1>
+            </div>
+            <button id="openSettingsBtn" class="icon-btn" aria-label="Open settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="5" y1="6" x2="19" y2="6"></line>
+                    <circle cx="15" cy="6" r="2"></circle>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <circle cx="9" cy="12" r="2"></circle>
+                    <line x1="5" y1="18" x2="19" y2="18"></line>
+                    <circle cx="13" cy="18" r="2"></circle>
+                </svg>
+            </button>
+        </header>
+
+        <section id="screen-step1" class="screen">
+            <div class="panel">
+                <div class="stepper">
+                    <div class="bars">
+                        <span class="bar active"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="labels">
+                        <span class="active">AI + HUMAN GUIDANCE</span>
+                        <span>SMARTER SUGGESTIONS</span>
+                        <span>COMPLETE</span>
+                    </div>
+                </div>
+                <h2 class="title">Find the right human insight when AI is not enough.</h2>
+                <p class="muted">This extension quietly spots moments where hearing from someone experienced may help
+                    more than another search result or another chat reply.</p>
+                <div class="pick-list space-top" role="radiogroup" aria-label="Choose one option">
+                    <button class="pick-item selected" data-pick="flow">
+                        <img src="icons/global.svg" alt=""/>
+                        <span>Works inside your normal browser flow.</span>
+                        <span class="pick-dot"></span>
+                    </button>
+                    <button class="pick-item" data-pick="timing">
+                        <img src="icons/airpod.svg" alt=""/>
+                        <span>Only appears when it seems useful.</span>
+                        <span class="pick-dot"></span>
+                    </button>
+                    <button class="pick-item" data-pick="simple">
+                        <img src="icons/stop-circle.svg" alt=""/>
+                        <span>No extra app or complicated setup.</span>
+                        <span class="pick-dot"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button id="step1NextBtn" class="btn btn-primary">Next</button>
+            </div>
+        </section>
+
+        <section id="screen-step2" class="screen">
+            <div class="panel">
+                <div class="stepper">
+                    <div class="bars">
+                        <span class="bar active"></span>
+                        <span class="bar active"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="labels">
+                        <span class="active">AI + HUMAN GUIDANCE</span>
+                        <span class="active">SMARTER SUGGESTIONS</span>
+                        <span>COMPLETE</span>
+                    </div>
+                </div>
+                <h2 class="title">What are you working towards?</h2>
+                <p class="muted">Share a short goal so we can match you more thoughtfully.</p>
+                <div class="field space-top">
+                    <label for="popupGoalContext">Goal context</label>
+                    <textarea id="popupGoalContext" rows="4" maxlength="200" aria-label="Goal context"></textarea>
+                    <p class="muted count"><span id="charCount">0</span>/200</p>
+                </div>
+                <p class="privacy">We only use your goal context to find peer matches, never to sell ads.</p>
+            </div>
+            <div class="footer-actions row">
+                <button id="step2BackBtn" class="btn btn-ghost">Back</button>
+                <button id="step2NextBtn" class="btn btn-primary">Next</button>
+            </div>
+        </section>
+
+        <section id="screen-step3" class="screen hidden">
+            <div class="panel">
+                <div class="stepper">
+                    <div class="bars">
+                        <span class="bar active"></span>
+                        <span class="bar active"></span>
+                        <span class="bar active"></span>
+                    </div>
+                    <div class="labels">
+                        <span class="active">AI + HUMAN GUIDANCE</span>
+                        <span class="active">SMARTER SUGGESTIONS</span>
+                        <span class="active">COMPLETE</span>
+                    </div>
+                </div>
+                <h2 class="title">You're all set.</h2>
+                <p class="muted">We'll use your goal context only when it looks helpful, so suggestions feel timely
+                    rather than distracting.</p>
+                <div style="background-color: #F2F5F8; padding: 10px; margin-top: 10px; margin-bottom: 10px;">
+                    <div style="display: flex; gap: 4px; align-items: center;"><img src="icons/tick-circle.svg" alt=""/>
+                        <p>Goal context saved</p></div>
+                    <div style="display: flex; gap: 4px; align-items: center;"><img src="icons/tick-circle.svg" alt=""/>
+                        <p>Suggestions enabled</p></div>
+                    <div style="display: flex; gap: 4px; align-items: center;"><img src="icons/tick-circle.svg" alt=""/>
+                        <p>Privacy preferences respected</p></div>
+
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button id="finishBtn" class="btn btn-primary">Finish</button>
+            </div>
+        </section>
+
+        <section id="screen-connect" class="screen hidden">
+            <div class="connect-card">
+                <div class="connect-top">
+                    <button id="pauseTodayBtn" class="pause-link">Pause for today</button>
+                    <button id="closeConnectBtn" class="close-chip" aria-label="Close">×</button>
+                </div>
+                <h2 class="title">Solved a similar challenge.</h2>
+                <p class="muted">A quick peer conversation may help more than another search result right now.</p>
+                <div class="peer-grid">
+                <div class="peer-item">
+                    <strong>Product Design</strong>
+                    <span>
+          <img src="icons/global.svg" alt="" />
+          DOMAIN
+        </span>
+                </div>
+
+                <div class="peer-item">
+                    <strong>6+ years</strong>
+                    <span>
+          <img src="icons/star.svg" alt="" />
+          EXPERIENCE
+        </span>
+                </div>
+
+                <div class="peer-item">
+                    <strong>Availability</strong>
+                    <span>
+          <img src="icons/timer.svg" alt="" />
+          TODAY
+        </span>
+                </div>
+            </div>
+                <button id="connectBtn" class="btn btn-primary wide">Connect</button>
+            </div>
+        </section>
+
+        <section id="screen-timer" class="screen hidden">
+            <div class="connect-card">
+                <div class="connect-top">
+                    <button id="pauseTodayBtnTimer" class="pause-link">Pause for today</button>
+                    <button id="closeTimerBtn" class="close-chip" aria-label="Close">×</button>
+                </div>
+                <h2 class="title">Solved a similar challenge.</h2>
+                <p class="muted">A quick peer conversation may help more than another search result right now.</p>
+                <div class="peer-grid">
+                <div class="peer-item">
+                    <strong>Product Design</strong>
+                    <span>
+          <img src="icons/global.svg" alt=""/>
+          DOMAIN
+        </span>
+                </div>
+
+                <div class="peer-item">
+                    <strong>6+ years</strong>
+                    <span>
+          <img src="icons/star.svg" alt=""/>
+          EXPERIENCE
+        </span>
+                </div>
+
+                <div class="peer-item">
+                    <strong>Availability</strong>
+                    <span>
+          <img src="icons/timer.svg" alt=""/>
+          TODAY
+        </span>
+                </div>
+            </div>
+            <div class="timer-box">
+                <div class="timer-bar"><span id="timerProgress"></span></div>
+                <p class="timer-text">AUTO DISMISS IN <span id="timerSeconds">30</span>S</p>
+            </div>
+            <button id="timerConnectBtn" class="btn btn-primary wide">Connect</button>
+            </div>
+        </section>
+
+        <section id="screen-settings" class="screen hidden">
+
+            <div class="panel space-top">
+                <label class="toggle">
+                    <span>Pause for today</span>
+                    <input type="checkbox" id="pauseToggle" aria-label="Pause extension"/>
+                </label>
+                <div class="field space-top settings-frequency">
+                    <label>Suggestion frequency</label>
+                    <p class="settings-hint">Choose how often the extension surfaces peer suggestions.</p>
+                    <div class="frequency-grid" role="radiogroup" aria-label="Suggestion frequency">
+                        <button type="button" class="freq-btn" data-value="active">ACTIVE</button>
+                        <button type="button" class="freq-btn" data-value="reduced">REDUCED</button>
+                        <button type="button" class="freq-btn" data-value="paused">PAUSED</button>
+                    </div>
+                </div>
+                <div class="field space-top settings-goal">
+                    <label for="settingsGoalContext">Goal context <sup>*</sup></label>
+                    <textarea id="settingsGoalContext" rows="4" maxlength="200" aria-label="Goal context"></textarea>
+                    <p class="muted count"><span id="settingsCharCount">0</span>/200</p>
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button id="saveBtn" class="btn btn-primary">Done</button>
+            </div>
+        </section>
+
+    </section>
+</main>
+
+<script src="crypto.js"></script>
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
