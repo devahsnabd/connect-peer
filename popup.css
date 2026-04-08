@@ -36,6 +36,29 @@
 
 .done-list { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
 .done-list li { background:#f4f8fc; border:1px solid #edf2f9; border-radius:12px; padding:12px 14px; font-weight:600; }
+.complete-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #f2f5f8;
+  border: 1px solid #e5eaf2;
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.complete-item {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.complete-item p {
+  margin: 0;
+  color: #253047;
+  font-weight: 600;
+  font-size: 13px;
+}
 
 .connect-card { border:1px solid #edf2f9; background:#ffffff; border-radius:16px; padding:14px; }
 .connect-top { display:flex; justify-content:space-between; align-items:center; }
@@ -45,7 +68,7 @@
 .peer-grid > div { background:#f8fafd; border-radius:10px; border:1px solid #edf2fa; padding:10px; }
 .peer-grid strong { display:block; font-size:14px; }
 .peer-grid span { color:#7f8aa1; font-size:11px; font-weight:700; }
-close-toggle {
+.close-toggle {
   width: 52px;
   height: 30px;
   border-radius: 999px;
@@ -133,6 +156,25 @@ close-toggle {
   box-shadow: 0 6px 20px rgba(79,70,229,0.3);
 }
 .wide { width:100%; }
+.connect-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.connect-actions .btn {
+  width: 100%;
+}
+
+.btn-secondary {
+  background: #f2f5f8;
+  color: #1f293d;
+  border: 1px solid #c7d1e2;
+}
+
+.btn-secondary:hover {
+  background: #e7edf5;
+}
 .timer-box { margin-bottom: 10px; }
 .timer-bar { height:7px; background:#e8edf6; border-radius:999px; overflow:hidden; }
 .timer-bar span { display:block; height:100%; width:100%; background:linear-gradient(90deg,#ffbd57,#ffcc70); transition: width 1s linear; }
@@ -293,8 +335,174 @@ close-toggle {
 }
 
 @media (prefers-color-scheme: dark) {
-  .step-body {
-    background: #1a2233;
-    border-color: rgba(255,255,255,0.12);
+  .icon-btn {
+    color: #c4cde1;
+  }
+
+  .stepper {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .bar {
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .labels {
+    color: #a7b2ca;
+  }
+
+  .labels .active {
+    color: #4de7bf;
+  }
+
+  .pick-item {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #e8edff;
+  }
+
+  .pick-dot {
+    border-color: #a9b7d4;
+  }
+
+  .privacy {
+    background: rgba(255, 179, 76, 0.14);
+    color: #ffd39a;
+    border-color: rgba(255, 179, 76, 0.44);
+  }
+
+  .connect-card {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: #161d2b;
+  }
+
+  .pause-link {
+    color: #d8e1f5;
+  }
+
+  .close-chip {
+    border-color: #93a1bf;
+    background: #2a3347;
+    color: #d0d9ea;
+  }
+
+  .peer-grid {
+    background: #1e2738;
+  }
+
+  .peer-grid > div {
+    background: #283146;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .peer-item {
+    background: #283146;
+  }
+
+  .peer-item strong {
+    color: #f1f5ff;
+  }
+
+  .peer-item span {
+    color: #c1ccdf;
+  }
+
+  .complete-list {
+    background: #1f293b;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .complete-item p {
+    color: #e4ebf8;
+  }
+
+  .btn-secondary {
+    background: #253046;
+    color: #edf2ff;
+    border-color: #4a5a79;
+  }
+
+  .btn-secondary:hover {
+    background: #2d3951;
+  }
+
+  .timer-bar {
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .timer-text {
+    color: #d5def1;
+  }
+
+  #screen-settings .panel {
+    background: #161d2b;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .toggle {
+    color: #edf2ff;
+  }
+
+  .toggle input {
+    background: #34435f;
+    border-color: #4f5f80;
+  }
+
+  .toggle input::after {
+    background: #e8edf8;
+    border-color: #a6b4cf;
+  }
+
+  .toggle input:checked {
+    background: #e9eef8;
+    border-color: #e9eef8;
+  }
+
+  .toggle input:checked::after {
+    background: #0f1521;
+    border-color: #0f1521;
+  }
+
+  .settings-frequency {
+    background: #1f293b;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .settings-frequency > label {
+    color: #edf2ff;
+  }
+
+  .settings-hint {
+    color: #b6c0d4;
+  }
+
+  .freq-btn {
+    background: #2a3449;
+    border-color: #475875;
+    color: #c5cfe2;
+  }
+
+  .freq-btn::after {
+    border-color: #b2c0da;
+  }
+
+  .freq-btn.active {
+    background: #243140;
+    color: #f0f6ff;
+    border-color: #35d9e8;
+  }
+
+  .settings-goal > label {
+    color: #c4cee2;
+  }
+
+  #settingsGoalContext {
+    background: #11192a;
+    border-color: #3d4f6d;
+    color: #e3eaf8;
+  }
+
+  #screen-settings .count {
+    color: #aeb9d0;
   }
 }

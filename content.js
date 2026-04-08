@@ -52,7 +52,7 @@
     return type === "search" || type === "ai_chat" || type === "form_heavy";
   }
 
-  function createOverlay(peer, isAiChat) {
+  function createOverlay(peer) {
     const container = document.createElement("div");
     container.id = "peer-connect-root";
     container.setAttribute("role", "dialog");
@@ -124,7 +124,7 @@
         font-size: 13px;
         line-height: 1.45;
         margin: 0 0 14px;
-        color: #79829a;
+        color: #4b5567;
       }
       .peer-grid {
         display: grid;
@@ -144,7 +144,7 @@
         margin-bottom: 2px;
       }
       .peer-item span {
-        color: #7d879e;
+        color: #475569;
         font-size: 11px;
       }
       .actions {
@@ -174,12 +174,19 @@
       }
       .not-now {
         flex: 1;
+        background: #f3f6fb;
+        color: #1f2a44;
+        border: 1px solid #c5d0e4;
+        font-weight: 600;
+      }
+      .not-now:hover {
+        background: #e9eef8;
       }
       .meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #65708a;
+        color: #475569;
         font-size: 11px;
       }
       .bar {
@@ -205,12 +212,17 @@
         .pause-link,
         .summary,
         .meta {
-          color: #c2cae0;
+          color: #d5def3;
         }
         button {
           color: #ecf0ff;
           border-color: rgba(255, 255, 255, 0.24);
           background: transparent;
+        }
+        .not-now {
+          background: rgba(255, 255, 255, 0.1);
+          color: #f2f5ff;
+          border-color: rgba(255, 255, 255, 0.3);
         }
         .peer-item {
           background: rgba(255, 255, 255, 0.06);
@@ -277,16 +289,13 @@
     const meta = document.createElement("div");
     meta.className = "meta";
     const timerText = document.createElement("span");
-    timerText.textContent = isAiChat ? "Auto-dismiss in 30s" : "Suggestion ready";
+    timerText.textContent = "Auto-dismiss in 30s";
     meta.appendChild(timerText);
 
     const bar = document.createElement("div");
     bar.className = "bar";
     const progress = document.createElement("span");
     bar.appendChild(progress);
-    if (!isAiChat) {
-      bar.style.display = "none";
-    }
 
     notNowBtn.className = "not-now";
 
@@ -304,22 +313,20 @@
     shadow.appendChild(style);
     shadow.appendChild(card);
     document.documentElement.appendChild(container);
-    container.focus();
+    connectBtn.focus();
 
     let dismissTimer = null;
     let secondsLeft = 30;
-    if (isAiChat) {
-      dismissTimer = setInterval(() => {
-        secondsLeft -= 1;
-        timerText.textContent = `Auto-dismiss in ${secondsLeft}s`;
-        const percent = Math.max((secondsLeft / 30) * 100, 0);
-        progress.style.width = `${percent}%`;
-        if (secondsLeft <= 0) {
-          clearInterval(dismissTimer);
-          closeOverlay("timeout");
-        }
-      }, 1000);
-    }
+    dismissTimer = setInterval(() => {
+      secondsLeft -= 1;
+      timerText.textContent = `Auto-dismiss in ${Math.max(secondsLeft, 0)}s`;
+      const percent = Math.max((secondsLeft / 30) * 100, 0);
+      progress.style.width = `${percent}%`;
+      if (secondsLeft <= 0) {
+        clearInterval(dismissTimer);
+        closeOverlay("timeout");
+      }
+    }, 1000);
 
     function closeOverlay(reason) {
       if (dismissTimer) {
@@ -336,14 +343,13 @@
     }
 
     connectBtn.addEventListener("click", () => {
-      const url = new URL("https://peer-connect.example/connect");
-      url.searchParams.set("match_id", "abc123");
-      url.searchParams.set("context_token", "xyz789");
-      window.open(url.toString(), "_blank", "noopener");
+      const matchId = peer.matchId || "unknown_match";
+      console.log("Peer Connect: connect clicked, match_id:", matchId);
       closeOverlay("connect");
     });
 
     notNowBtn.addEventListener("click", () => {
+      console.log("Peer Connect: not now clicked");
       closeOverlay("dismiss");
     });
 
@@ -399,7 +405,7 @@
     state.overlayVisible = true;
     state.sessionSuggestionsShown += 1;
     state.lastSuggestionAt = Date.now();
-    createOverlay(suggestion, state.pageType === "ai_chat");
+    createOverlay(suggestion);
   }
 
   function bindAiMessageTracking() {

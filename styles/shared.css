@@ -1,5 +1,20 @@
 :root {
   color-scheme: light dark;
+  --bg: #f7f9fc;
+  --text: #121825;
+  --panel-bg: #fcfdff;
+  --panel-border: #e7edf8;
+  --panel-shadow: 0 8px 24px rgba(22, 34, 67, 0.08);
+  --muted: #7e879b;
+  --label: #6e788f;
+  --field-bg: #ffffff;
+  --field-text: #1d2538;
+  --field-border: #d8e0f1;
+  --btn-bg: #ffffff;
+  --btn-text: #111827;
+  --btn-ghost-border: #ccdbff;
+  --btn-ghost-text: #2d49ff;
+  --focus-ring: #8db1ff;
 }
 
 * {
@@ -9,8 +24,8 @@
 body {
   margin: 0;
   font-family: Inter, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #f7f9fc;
-  color: #121825;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .app-shell {
@@ -27,9 +42,9 @@ body {
 .panel {
   width: 100%;
   border-radius: 18px;
-  background: #fcfdff;
-  border: 1px solid #e7edf8;
-  box-shadow: 0 8px 24px rgba(22, 34, 67, 0.08);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   padding: 18px;
 }
 
@@ -38,7 +53,7 @@ h1, h2, h3, p {
 }
 
 .muted {
-  color: #7e879b;
+  color: var(--muted);
 }
 
 .btn {
@@ -48,15 +63,15 @@ h1, h2, h3, p {
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
-  color: #111827;
-  background: #ffffff;
+  color: var(--btn-text);
+  background: var(--btn-bg);
 }
 
 .btn:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid #8db1ff;
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -67,9 +82,9 @@ select:focus-visible {
 }
 
 .btn-ghost {
-  background: #ffffff;
-  border: 1px solid #ccdbff;
-  color: #2d49ff;
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-ghost-border);
+  color: var(--btn-ghost-text);
 }
 
 .field {
@@ -79,7 +94,7 @@ select:focus-visible {
 
 label {
   font-size: 13px;
-  color: #6e788f;
+  color: var(--label);
   font-weight: 600;
 }
 
@@ -87,9 +102,9 @@ textarea,
 input,
 select {
   width: 100%;
-  background: #ffffff;
-  color: #1d2538;
-  border: 1px solid #d8e0f1;
+  background: var(--field-bg);
+  color: var(--field-text);
+  border: 1px solid var(--field-border);
   border-radius: 10px;
   padding: 11px 12px;
   font-size: 15px;
@@ -105,34 +120,24 @@ select {
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1420;
+    --text: #edf1ff;
+    --panel-bg: #161d2b;
+    --panel-border: rgba(255, 255, 255, 0.14);
+    --panel-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --muted: #b7c1d8;
+    --label: #b7c1d8;
+    --field-bg: #101726;
+    --field-text: #edf1ff;
+    --field-border: rgba(255, 255, 255, 0.22);
+    --btn-bg: #1c2638;
+    --btn-text: #edf1ff;
+    --btn-ghost-border: rgba(141, 177, 255, 0.5);
+    --btn-ghost-text: #d9e6ff;
+  }
   body {
-    background: #0f1420;
-    color: #edf1ff;
-  }
-  .panel {
-    background: #F2F5F8;
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-  }
-  .muted,
-  label {
-    color: #b7c1d8;
-  }
-  .btn {
-    background: #1c2638;
-    color: #edf1ff;
-  }
-  .btn-ghost {
-    border-color: rgba(141, 177, 255, 0.5);
-    color: #d9e6ff;
-    width: 154px;
-  }
-  textarea,
-  input,
-  select {
-    background: #101726;
-    color: #edf1ff;
-    border-color: rgba(255, 255, 255, 0.2);
+    color-scheme: dark;
   }
 }
 

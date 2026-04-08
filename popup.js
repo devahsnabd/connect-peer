@@ -176,6 +176,8 @@
 
   on(document.getElementById("connectBtn"), "click", startTimerScreen);
   on(document.getElementById("timerConnectBtn"), "click", startTimerScreen);
+  on(document.getElementById("notNowBtn"), "click", () => show("step1"));
+  on(document.getElementById("timerNotNowBtn"), "click", () => show("connect"));
   on(document.getElementById("closeConnectBtn"), "click", () => show("step1"));
   on(document.getElementById("closeTimerBtn"), "click", () => show("connect"));
   on(document.getElementById("pauseTodayBtn"), "click", async () => {
