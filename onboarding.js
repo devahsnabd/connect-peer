@@ -30,7 +30,7 @@
     els.step2.classList.toggle("hidden", step !== 2);
     els.step3.classList.toggle("hidden", step !== 3);
     els.backBtn.classList.toggle("hidden", step === 1);
-    els.nextBtn.textContent = step === 3 ? "Finish" : "Next";
+    els.nextBtn.textContent = step === 3 ? "Done" : "Next";
 
     const bars = [els.stepBar1, els.stepBar2, els.stepBar3];
     const labels = [els.label1, els.label2, els.label3];

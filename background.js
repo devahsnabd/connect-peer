@@ -61,3 +61,34 @@ chrome.storage.onChanged.addListener(async (changes, areaName) => {
     await updateBadgeState();
   }
 });
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (!message || message.type !== "PEER_CONNECT_OPEN_POPUP") {
+    return false;
+  }
+
+  (async () => {
+    try {
+      if (chrome.action && typeof chrome.action.openPopup === "function") {
+        await chrome.action.openPopup();
+      } else {
+        const popupUrl = chrome.runtime.getURL("popup.html");
+        await chrome.tabs.create({ url: popupUrl });
+      }
+      sendResponse({ ok: true });
+    } catch (_error) {
+      try {
+        const popupUrl = chrome.runtime.getURL("popup.html");
+        await chrome.tabs.create({ url: popupUrl });
+        sendResponse({ ok: true, fallback: true });
+      } catch (fallbackError) {
+        sendResponse({
+          ok: false,
+          error: fallbackError instanceof Error ? fallbackError.message : String(fallbackError)
+        });
+      }
+    }
+  })();
+
+  return true;
+});

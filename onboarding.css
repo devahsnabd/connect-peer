@@ -271,7 +271,15 @@
 }
 
 #skipBtn {
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: #9aa3b3;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0;
 }
 
 #nextBtn {
@@ -287,6 +295,9 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  #skipBtn {
+    color: #aeb9d0;
+  }
   .icon-btn span {
     background: #b8c2d8;
   }

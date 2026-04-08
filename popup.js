@@ -10,8 +10,12 @@
     openSettingsBtn: document.getElementById("openSettingsBtn"),
     pickItems: Array.from(document.querySelectorAll(".pick-item")),
     step1NextBtn: document.getElementById("step1NextBtn"),
+    step1SkipBtn: document.getElementById("step1SkipBtn"),
+    step2SkipBtn: document.getElementById("step2SkipBtn"),
+    step3SkipBtn: document.getElementById("step3SkipBtn"),
     step2BackBtn: document.getElementById("step2BackBtn"),
     step2NextBtn: document.getElementById("step2NextBtn"),
+    step3BackBtn: document.getElementById("step3BackBtn"),
     finishBtn: document.getElementById("finishBtn"),
     goalContext: document.getElementById("popupGoalContext"),
     settingsGoalContext: document.getElementById("settingsGoalContext"),
@@ -103,9 +107,14 @@
       if (seconds <= 0) {
         clearInterval(timerId);
         timerId = null;
-        show("connect");
+        window.close();
       }
     }, 1000);
+  }
+
+  function stubConnectAction(buttonEl) {
+    const matchId = (buttonEl && buttonEl.dataset.matchId) || "unknown_match";
+    window.alert(`Connect clicked for match_id: ${matchId}`);
   }
 
   async function load() {
@@ -138,8 +147,21 @@
   });
 
   on(els.step1NextBtn, "click", () => show("step2"));
+  on(els.step1SkipBtn, "click", async () => {
+    await PeerConnectStorage.set({ onboardingCompleted: true, optedIn: false });
+    show("connect");
+  });
+  on(els.step2SkipBtn, "click", async () => {
+    await PeerConnectStorage.set({ onboardingCompleted: true, optedIn: false });
+    show("connect");
+  });
+  on(els.step3SkipBtn, "click", async () => {
+    await PeerConnectStorage.set({ onboardingCompleted: true, optedIn: false });
+    show("connect");
+  });
   on(els.step2BackBtn, "click", () => show("step1"));
   on(els.step2NextBtn, "click", () => show("step3"));
+  on(els.step3BackBtn, "click", () => show("step2"));
   on(els.finishBtn, "click", async () => {
     if (!els.goalContext) {
       return;
@@ -174,19 +196,28 @@
     button.addEventListener("click", () => setFrequencyUI(button.dataset.value || "active"));
   });
 
-  on(document.getElementById("connectBtn"), "click", startTimerScreen);
-  on(document.getElementById("timerConnectBtn"), "click", startTimerScreen);
-  on(document.getElementById("notNowBtn"), "click", () => show("step1"));
-  on(document.getElementById("timerNotNowBtn"), "click", () => show("connect"));
+  on(document.getElementById("connectBtn"), "click", (event) => {
+    stubConnectAction(event.currentTarget);
+    startTimerScreen();
+  });
+  on(document.getElementById("timerConnectBtn"), "click", (event) => {
+    stubConnectAction(event.currentTarget);
+  });
+  on(document.getElementById("notNowBtn"), "click", () => window.close());
+  on(document.getElementById("timerNotNowBtn"), "click", () => window.close());
   on(document.getElementById("closeConnectBtn"), "click", () => show("step1"));
   on(document.getElementById("closeTimerBtn"), "click", () => show("connect"));
-  on(document.getElementById("pauseTodayBtn"), "click", async () => {
-    await PeerConnectStorage.setPauseForToday();
-    show("connect");
+  on(document.getElementById("pauseTodayBtn"), "change", async (event) => {
+    if (event.currentTarget && event.currentTarget.checked) {
+      await PeerConnectStorage.setPauseForToday();
+      show("connect");
+    }
   });
-  on(document.getElementById("pauseTodayBtnTimer"), "click", async () => {
-    await PeerConnectStorage.setPauseForToday();
-    show("connect");
+  on(document.getElementById("pauseTodayBtnTimer"), "change", async (event) => {
+    if (event.currentTarget && event.currentTarget.checked) {
+      await PeerConnectStorage.setPauseForToday();
+      show("connect");
+    }
   });
 
   on(els.saveBtn, "click", async () => {

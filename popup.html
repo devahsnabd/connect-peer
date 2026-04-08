@@ -40,8 +40,8 @@
                     </div>
                     <div class="labels">
                         <span class="active">AI + HUMAN GUIDANCE</span>
-                        <span>SMARTER SUGGESTIONS</span>
-                        <span>COMPLETE</span>
+                        <span class="upcoming">SMARTER SUGGESTIONS</span>
+                        <span class="upcoming">COMPLETE</span>
                     </div>
                 </div>
                 <h2 class="title">Find the right human insight when AI is not enough.</h2>
@@ -65,7 +65,8 @@
                     </button>
                 </div>
             </div>
-            <div class="footer-actions">
+            <div class="footer-actions spread">
+                <button id="step1SkipBtn" class="skip-btn" type="button">Skip</button>
                 <button id="step1NextBtn" class="btn btn-primary">Next</button>
             </div>
         </section>
@@ -74,14 +75,14 @@
             <div class="panel">
                 <div class="stepper">
                     <div class="bars">
-                        <span class="bar active"></span>
+                        <span class="bar done"></span>
                         <span class="bar active"></span>
                         <span class="bar"></span>
                     </div>
                     <div class="labels">
-                        <span class="active">AI + HUMAN GUIDANCE</span>
+                        <span class="done">AI + HUMAN GUIDANCE</span>
                         <span class="active">SMARTER SUGGESTIONS</span>
-                        <span>COMPLETE</span>
+                        <span class="upcoming">COMPLETE</span>
                     </div>
                 </div>
                 <h2 class="title">What are you working towards?</h2>
@@ -93,9 +94,12 @@
                 </div>
                 <p class="privacy">We only use your goal context to find peer matches, never to sell ads.</p>
             </div>
-            <div class="footer-actions row">
-                <button id="step2BackBtn" class="btn btn-ghost">Back</button>
-                <button id="step2NextBtn" class="btn btn-primary">Next</button>
+            <div class="footer-actions spread">
+                <button id="step2SkipBtn" class="skip-btn" type="button">Skip</button>
+                <div class="row">
+                    <button id="step2BackBtn" class="btn btn-ghost">Back</button>
+                    <button id="step2NextBtn" class="btn btn-primary">Next</button>
+                </div>
             </div>
         </section>
 
@@ -103,13 +107,13 @@
             <div class="panel">
                 <div class="stepper">
                     <div class="bars">
-                        <span class="bar active"></span>
-                        <span class="bar active"></span>
+                        <span class="bar done"></span>
+                        <span class="bar done"></span>
                         <span class="bar active"></span>
                     </div>
                     <div class="labels">
-                        <span class="active">AI + HUMAN GUIDANCE</span>
-                        <span class="active">SMARTER SUGGESTIONS</span>
+                        <span class="done">AI + HUMAN GUIDANCE</span>
+                        <span class="done">SMARTER SUGGESTIONS</span>
                         <span class="active">COMPLETE</span>
                     </div>
                 </div>
@@ -125,16 +129,23 @@
                         <p>Privacy preferences respected</p></div>
                 </div>
             </div>
-            <div class="footer-actions">
-                <button id="finishBtn" class="btn btn-primary">Finish</button>
+            <div class="footer-actions spread">
+                <button id="step3SkipBtn" class="skip-btn" type="button">Skip</button>
+                <div class="row">
+                    <button id="step3BackBtn" class="btn btn-ghost">Back</button>
+                    <button id="finishBtn" class="btn btn-primary">Done</button>
+                </div>
             </div>
         </section>
 
         <section id="screen-connect" class="screen hidden">
             <div class="connect-card">
                 <div class="connect-top">
-                    <button id="pauseTodayBtn" class="pause-link"></button>
-                    <button id="closeConnectBtn" class="close-chip" aria-label="Close">×</button>
+                    <label class="pause-inline-toggle" for="pauseTodayBtn">
+                        <span>Pause for today</span>
+                        <input type="checkbox" id="pauseTodayBtn" aria-label="Pause for today"/>
+                    </label>
+
                 </div>
                 <h2 class="title">Solved a similar challenge.</h2>
                 <p class="muted">A quick peer conversation may help more than another search result right now.</p>
@@ -164,8 +175,9 @@
                 </div>
             </div>
                 <div class="connect-actions">
-                    <button id="connectBtn" class="btn btn-primary">Connect</button>
+
                     <button id="notNowBtn" class="btn btn-secondary">Not now</button>
+                    <button id="connectBtn" class="btn btn-primary" data-match-id="abc123">Connect</button>
                 </div>
             </div>
         </section>
@@ -173,8 +185,10 @@
         <section id="screen-timer" class="screen hidden">
             <div class="connect-card">
                 <div class="connect-top">
-                    <button id="pauseTodayBtnTimer" class="pause-link">Pause for today</button>
-                    <button id="closeTimerBtn" class="close-chip" aria-label="Close">×</button>
+                    <label class="pause-inline-toggle" for="pauseTodayBtnTimer">
+                        <span>Pause for today</span>
+                        <input type="checkbox" id="pauseTodayBtnTimer" aria-label="Pause for today"/>
+                    </label>
                 </div>
                 <h2 class="title">Solved a similar challenge.</h2>
                 <p class="muted">A quick peer conversation may help more than another search result right now.</p>
@@ -208,7 +222,7 @@
                 <p class="timer-text">AUTO DISMISS IN <span id="timerSeconds">30</span>S</p>
             </div>
             <div class="connect-actions">
-                <button id="timerConnectBtn" class="btn btn-primary">Connect</button>
+                <button id="timerConnectBtn" class="btn btn-primary" data-match-id="abc123">Connect</button>
                 <button id="timerNotNowBtn" class="btn btn-secondary">Not now</button>
             </div>
             </div>
