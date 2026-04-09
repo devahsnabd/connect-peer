@@ -498,8 +498,11 @@
     }
 
     connectBtn.addEventListener("click", () => {
-      const matchId = peer.matchId || "unknown_match";
-      console.log("Peer Connect: connect clicked, match_id:", matchId);
+      const url = PeerConnectSession.buildConnectionUrl(peer, { source: "overlay" });
+      chrome.runtime.sendMessage({
+        type: "PEER_CONNECT_OPEN_SESSION",
+        url
+      });
       closeOverlay("connect");
     });
 

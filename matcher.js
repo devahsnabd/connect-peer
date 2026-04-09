@@ -10,27 +10,6 @@
     "learn",
     "advice"
   ];
-  const MOCK_PEERS = [
-    {
-      matchId: "abc123",
-      contextToken: "xyz789",
-      title: "Solved a similar challenge",
-      supportingText: "A quick peer conversation may help more than another search result right now.",
-      domain: "Product Design",
-      experience: "6+ years",
-      availability: "Today"
-    },
-    {
-      matchId: "def456",
-      contextToken: "uvw111",
-      title: "Solved a similar challenge",
-      supportingText: "Peer recently navigated a similar blocker and can share practical next steps.",
-      domain: "Frontend",
-      experience: "5+ years",
-      availability: "This week"
-    }
-  ];
-
   function detectPageType(url, formFieldCount) {
     const hostname = url.hostname;
     const path = url.pathname;
@@ -121,7 +100,13 @@
       return null;
     }
 
-    const peer = MOCK_PEERS[Math.floor(Math.random() * MOCK_PEERS.length)];
+    const queue = global.PeerConnectSession
+      ? global.PeerConnectSession.getPeerQueue()
+      : [];
+    const peer = queue.length ? queue[Math.floor(Math.random() * queue.length)] : null;
+    if (!peer) {
+      return null;
+    }
     return { ...peer, score };
   }
 

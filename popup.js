@@ -25,12 +25,23 @@
     settingsCharCount: document.getElementById("settingsCharCount"),
     frequencyButtons: Array.from(document.querySelectorAll(".freq-btn")),
     timerSeconds: document.getElementById("timerSeconds"),
-    timerProgress: document.getElementById("timerProgress")
+    timerProgress: document.getElementById("timerProgress"),
+    connectBtn: document.getElementById("connectBtn"),
+    timerConnectBtn: document.getElementById("timerConnectBtn"),
+    connectDomain: document.getElementById("connectDomain"),
+    connectExperience: document.getElementById("connectExperience"),
+    connectAvailability: document.getElementById("connectAvailability"),
+    connectSupportingText: document.getElementById("connectSupportingText"),
+    timerDomain: document.getElementById("timerDomain"),
+    timerExperience: document.getElementById("timerExperience"),
+    timerAvailability: document.getElementById("timerAvailability"),
+    timerSupportingText: document.getElementById("timerSupportingText")
   };
 
   let selectedFrequency = "active";
   let activeScreen = "step1";
   let timerId = null;
+  let selectedPeer = null;
 
   function on(el, eventName, handler) {
     if (el) {
@@ -112,9 +123,36 @@
     }, 1000);
   }
 
-  function stubConnectAction(buttonEl) {
-    const matchId = (buttonEl && buttonEl.dataset.matchId) || "unknown_match";
-    window.alert(`Connect clicked for match_id: ${matchId}`);
+  function applyPeerToCard(prefix, peer) {
+    const domainEl = els[`${prefix}Domain`];
+    const experienceEl = els[`${prefix}Experience`];
+    const availabilityEl = els[`${prefix}Availability`];
+    const supportingTextEl = els[`${prefix}SupportingText`];
+    if (domainEl) {
+      domainEl.textContent = peer.domain || "Generalist";
+    }
+    if (experienceEl) {
+      experienceEl.textContent = peer.experience || "Available soon";
+    }
+    if (availabilityEl) {
+      availabilityEl.textContent = peer.availability || "Waitlist";
+    }
+    if (supportingTextEl) {
+      supportingTextEl.textContent =
+        peer.supportingText || "A peer may help you unblock this quickly.";
+    }
+  }
+
+  function syncSelectedPeer(peer) {
+    selectedPeer = peer || PeerConnectSession.getDefaultPeer();
+    applyPeerToCard("connect", selectedPeer);
+    applyPeerToCard("timer", selectedPeer);
+  }
+
+  async function openPeerConnection() {
+    const peer = selectedPeer || PeerConnectSession.getDefaultPeer();
+    const url = PeerConnectSession.buildConnectionUrl(peer, { source: "popup" });
+    await chrome.tabs.create({ url });
   }
 
   async function load() {
@@ -136,6 +174,7 @@
       els.pauseToggle.checked = settings.isPaused;
     }
     setFrequencyUI(settings.frequency);
+    syncSelectedPeer(PeerConnectSession.getDefaultPeer());
     show(settings.onboardingCompleted ? "connect" : "step1");
   }
 
@@ -196,12 +235,12 @@
     button.addEventListener("click", () => setFrequencyUI(button.dataset.value || "active"));
   });
 
-  on(document.getElementById("connectBtn"), "click", (event) => {
-    stubConnectAction(event.currentTarget);
+  on(els.connectBtn, "click", async () => {
+    await openPeerConnection();
     startTimerScreen();
   });
-  on(document.getElementById("timerConnectBtn"), "click", (event) => {
-    stubConnectAction(event.currentTarget);
+  on(els.timerConnectBtn, "click", async () => {
+    await openPeerConnection();
   });
   on(document.getElementById("notNowBtn"), "click", () => window.close());
   on(document.getElementById("timerNotNowBtn"), "click", () => window.close());

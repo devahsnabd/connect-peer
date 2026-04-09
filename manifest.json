@@ -31,6 +31,7 @@
       "js": [
         "crypto.js",
         "storage.js",
+        "connect-session.js",
         "matcher.js",
         "content.js"
       ],

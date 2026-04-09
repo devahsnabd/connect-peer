@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peer Connection</title>
+  <link rel="stylesheet" href="styles/shared.css" />
+  <link rel="stylesheet" href="peer-connection.css" />
+</head>
+<body>
+  <main class="session-shell">
+    <section class="session-hero">
+      <p class="eyebrow">Peer Connect Session</p>
+      <h1 id="sessionTitle">Preparing your peer session</h1>
+      <p id="sessionMessage" class="muted">
+        We are loading the session details from your match and context token.
+      </p>
+    </section>
+
+    <section class="session-layout">
+      <article class="panel session-panel">
+        <p id="statusPill" class="status-pill">Checking availability</p>
+        <h2 id="peerTitle">Peer match</h2>
+        <p id="peerSummary" class="muted">
+          Your session will be pre-populated using the selected peer match.
+        </p>
+
+        <div class="detail-grid">
+          <div class="detail-card">
+            <span>Domain</span>
+            <strong id="peerDomain">-</strong>
+          </div>
+          <div class="detail-card">
+            <span>Experience</span>
+            <strong id="peerExperience">-</strong>
+          </div>
+          <div class="detail-card">
+            <span>Availability</span>
+            <strong id="peerAvailability">-</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button id="primaryActionBtn" class="btn btn-primary" type="button">Start session</button>
+          <button id="secondaryActionBtn" class="btn btn-ghost" type="button">Join waitlist</button>
+        </div>
+      </article>
+
+      <aside class="panel context-panel">
+        <h2>Session context</h2>
+        <div class="field space-top">
+          <label for="matchIdField">Match ID</label>
+          <input id="matchIdField" readonly />
+        </div>
+        <div class="field space-top">
+          <label for="contextTokenField">Context token</label>
+          <input id="contextTokenField" readonly />
+        </div>
+        <p class="muted space-top">
+          These values came from the connection URL so the page can pre-populate the session state.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script src="connect-session.js"></script>
+  <script src="peer-connection.js"></script>
+</body>
+</html>
